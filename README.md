@@ -14,6 +14,7 @@ main.py
 Yolo_detect.py
 cnn_predict.py
 network_camera.py
+raspi.py
 
 ## Menjalankan
 
