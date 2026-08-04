@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: ocusense_db
+    restart: always
+    environment:
+      POSTGRES_USER: ocusense_user
+      POSTGRES_PASSWORD: ocusense_password
+      POSTGRES_DB: ocusense_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ocusense_pgdata:/var/lib/postgresql/data
+
+  mqtt:
+    image: eclipse-mosquitto:2
+    container_name: ocusense_mqtt
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ocusense_mqtt_data:/mosquitto/data
+      - ocusense_mqtt_log:/mosquitto/log
+
+  web:
+    build: .
+    container_name: ocusense_web
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://ocusense_user:ocusense_password@db:5432/ocusense_db
+      - NEXT_PUBLIC_MQTT_URL=ws://localhost:9001
+    depends_on:
+      - db
+      - mqtt
+    # Menjalankan migrasi basis data sebelum aplikasi web menyala
+    command: sh -c "npx prisma migrate deploy && npm start"
+
+  listener:
+    build: .
+    container_name: ocusense_listener
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://ocusense_user:ocusense_password@db:5432/ocusense_db
+      - MQTT_BROKER_URL=mqtt://mqtt:1883
+      - EMAIL_USER=alamat_surel_anda@gmail.com
+      - EMAIL_PASS=kata_sandi_aplikasi_anda
+    depends_on:
+      - db
+      - mqtt
+    # Menimpa perintah bawaan Dockerfile untuk mengeksekusi pendengar MQTT
+    command: npm run listener
+
+volumes:
+  ocusense_pgdata:
+  ocusense_mqtt_data:
+  ocusense_mqtt_log:

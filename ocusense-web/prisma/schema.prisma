@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Device {
+  id           String   @id @default(uuid())
+  macAddress   String   @unique
+  name         String
+  pairingCode  String   @default("1234")
+  operatorName String?
+  operatorDob  DateTime?
+  alertPhone   String?
+  alertEmail   String?
+  createdAt    DateTime @default(now())
+  records      MedicalRecord[]
+}
+
+model MedicalRecord {
+  id                String   @id @default(uuid())
+  scanId            String   @unique
+  timestamp         DateTime
+  patientName       String?
+  patientDob        DateTime?
+  patientAge        Int?
+  batteryPercentage Float
+  latencyMs         Float
+  diagnosis         String
+  confidenceScore   Float
+  boundingBox       Json?
+  image             String?  @db.Text 
+  createdAt         DateTime @default(now())
+  
+  deviceId          String?
+  device            Device?  @relation(fields: [deviceId], references: [id])
+}

@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import "tailwindcss";
+
+/* Konfigurasi Tema Utama (Standar Klinis/Profesional) */
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --color-background-main: #F8FAFC; /* Slate-50 untuk latar yang bersih dan tidak melelahkan mata */
+}
+
+/* Modifikasi Lapisan Dasar */
+@layer base {
+  body {
+    background-color: var(--color-background-main);
+    color: #0F172A; /* Slate-900 untuk kontras teks yang optimal */
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.02em; /* Kerapatan huruf (tracking) gaya desain enterprise */
+  }
+}
+
+/* Penambahan Kelas Utilitas Kustom */
+@layer utilities {
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  }
+  
+  .premium-shadow {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  }
+  
+  .yolo-box {
+    border: 2px solid #2563EB;
+    background: rgba(37, 99, 235, 0.08);
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.15);
+  }
+  
+  .dropdown-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.98);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .dropdown-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+  
+  .print-hide {
+    @media print {
+      display: none !important;
+    }
+  }
+}
+
+/* Kustomisasi Bilah Gulir (Scrollbar) Minimalis */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
