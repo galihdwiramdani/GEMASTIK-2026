@@ -1,0 +1,14 @@
+names:
+- Bloodshot_Eyes
+- Clear_Eye_Area
+- Other_Eye_Disorders
+nc: 3
+roboflow:
+  license: CC BY 4.0
+  project: deteksi-mata-ivi0j
+  url: https://universe.roboflow.com/galihs-workspace-bk1zj/deteksi-mata-ivi0j/dataset/2
+  version: 2
+  workspace: galihs-workspace-bk1zj
+test: ../test/images
+train: ../train/images
+val: ../valid/images
