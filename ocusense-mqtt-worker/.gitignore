@@ -1,0 +1,22 @@
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Kredensial & Variabel Lingkungan (SANGAT PENTING!)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Hasil kompilasi TypeScript
+dist/
+build/
+
+# File temporary Python (untuk dummy_edge.py)
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/

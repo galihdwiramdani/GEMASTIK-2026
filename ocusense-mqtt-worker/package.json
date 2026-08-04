@@ -1,0 +1,24 @@
+{
+  "name": "ocusense-mqtt-worker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx mqtt-listener.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "mqtt": "^5.15.2",
+    "nodemailer": "^9.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "prisma": "^5.22.0",
+    "tsx": "^4.23.5",
+    "typescript": "^7.0.2"
+  }
+}
