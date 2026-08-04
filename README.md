@@ -1,4 +1,4 @@
-# Detection Area Mata
+# Detection Area Mata and Klasifikasi Mata Katarak
 
 Project AI Deteksi Area Mata menggunakan
 - YOLOv8
